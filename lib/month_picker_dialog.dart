@@ -28,7 +28,7 @@ Future<DateTime?> showMonthPicker({
   assert(localizations != null);
   return await showDialog<DateTime>(
     context: context,
-    builder: (context) => _MonthPickerDialog(
+    builder: (context) => MonthPickerDialog(
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
@@ -38,12 +38,12 @@ Future<DateTime?> showMonthPicker({
   );
 }
 
-class _MonthPickerDialog extends StatefulWidget {
+class MonthPickerDialog extends StatefulWidget {
   final DateTime? initialDate, firstDate, lastDate;
   final MaterialLocalizations localizations;
   final Locale? locale;
 
-  const _MonthPickerDialog({
+  const MonthPickerDialog({
     Key? key,
     required this.initialDate,
     required this.localizations,
@@ -53,10 +53,10 @@ class _MonthPickerDialog extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MonthPickerDialogState createState() => _MonthPickerDialogState();
+  MonthPickerDialogState createState() => MonthPickerDialogState();
 }
 
-class _MonthPickerDialogState extends State<_MonthPickerDialog> {
+class MonthPickerDialogState extends State<MonthPickerDialog> {
   final GlobalKey<YearSelectorState> _yearSelectorState = new GlobalKey();
   final GlobalKey<MonthSelectorState> _monthSelectorState = new GlobalKey();
 
@@ -143,11 +143,11 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
   ) {
     return ButtonBar(
       children: <Widget>[
-        FlatButton(
+        MaterialButton(
           onPressed: () => Navigator.pop(context, null),
           child: Text(widget.localizations.cancelButtonLabel),
         ),
-        FlatButton(
+        MaterialButton(
           onPressed: () => Navigator.pop(context, selectedDate),
           child: Text(widget.localizations.okButtonLabel),
         )

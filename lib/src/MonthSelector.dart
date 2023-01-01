@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:month_picker_dialog/src/common.dart';
@@ -65,20 +65,21 @@ class MonthSelectorState extends State<MonthSelector> {
 
   Widget _getMonthButton(final DateTime date, final String locale) {
     final bool isEnabled = _isEnabled(date);
-    return FlatButton(
+    return MaterialButton(
       onPressed: isEnabled
           ? () => widget.onMonthSelected(DateTime(date.year, date.month))
           : null,
+        
       color: date.month == widget.selectedDate!.month &&
               date.year == widget.selectedDate!.year
-          ? Theme.of(context).accentColor
+          ? Theme.of(context).secondaryHeaderColor
           : null,
       textColor: date.month == widget.selectedDate!.month &&
               date.year == widget.selectedDate!.year
-          ? Theme.of(context).accentTextTheme.button!.color
+          ? Theme.of(context).textTheme.button!.color
           : date.month == DateTime.now().month &&
                   date.year == DateTime.now().year
-              ? Theme.of(context).accentColor
+              ? Theme.of(context).secondaryHeaderColor
               : null,
       child: Text(
         DateFormat.MMM(locale).format(date),
